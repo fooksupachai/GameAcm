@@ -45,7 +45,7 @@ public class SnakeAcm extends GraphicsProgram implements ActionListener {
 		
 		randomFood();
 		
-		GLabel startLabel = new GLabel("Click button to start game.", getWidth() / 2,
+		GLabel startLabel = new GLabel("Click Let's hunt to start game.", getWidth() / 2,
 				(getHeight() / 2));
 		startLabel.move(-startLabel.getAscent()-130, -startLabel.getHeight());
 		startLabel.setFont("Comic Sans MS-24");
@@ -53,12 +53,12 @@ public class SnakeAcm extends GraphicsProgram implements ActionListener {
 		
 		add(startLabel);
 		
-		GOval textStart = new GOval((getWidth() / 2) - 50,(getHeight() / 2) + 20,100,50);
+		GOval textStart = new GOval((getWidth() / 2) - 30,(getHeight() / 2) + 20,100,50);
 		textStart.setColor(Color.BLACK);
 		textStart.setFilled(true);
 		add(textStart);
 		
-		GLabel textStart2 = new GLabel("Let's hunt !",500,313);
+		GLabel textStart2 = new GLabel("Let's hunt !",520,313);
 		textStart2.move(-textStart2.getAscent()-140, -textStart2.getAscent()-4);
 		textStart2.setColor(Color.WHITE);
 		textStart2.setFont("Comic Sans MS");
@@ -69,15 +69,29 @@ public class SnakeAcm extends GraphicsProgram implements ActionListener {
 		textStart3.setColor(Color.BLACK);
 		textStart3.setFont("Rockwell-100");
 		add(textStart3);
-
-		GLine line1 = new GLine(70, 50,70 , 180);
-		GLine line2 = new GLine(715, 50,715 , 180);
-		GLine line3 = new GLine(70, 50,715 , 50);
-		GLine line4 = new GLine(70, 180,715 , 180);
+		
+		GRect line1 = new GRect(70,50,645,10);
+		line1.setFilled(true);
+		line1.setColor(Color.BLACK);
 		add(line1);
+		
+		GRect line2 = new GRect(70,170,645,10);
+		line2.setFilled(true);
+		line2.setColor(Color.BLACK);
 		add(line2);
+		
+		GRect line3 = new GRect(70,60,10,110);
+		line3.setFilled(true);
+		line3.setColor(Color.BLACK);
 		add(line3);
+		
+		GRect line4 = new GRect(705,60,10,110);
+		line4.setFilled(true);
+		line4.setColor(Color.BLACK);
 		add(line4);
+
+
+
 
 		
 		scoreLabel = new GLabel("Yours Score : " + score, getWidth() - 425, 30);
