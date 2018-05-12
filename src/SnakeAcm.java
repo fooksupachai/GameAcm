@@ -32,6 +32,8 @@ public class SnakeAcm extends GraphicsProgram implements ActionListener {
 	private boolean isPlaying, isGameOver;
 	private int score, previousScore;
 	private GLabel scoreLabel;
+	
+	ArrayList<GRect> rock = new ArrayList<GRect>();
 
 	public void run() {
 		
@@ -42,8 +44,6 @@ public class SnakeAcm extends GraphicsProgram implements ActionListener {
 		isPlaying = false;
 		
 		addBackground();
-		
-		randomFood();
 		
 		GLabel startLabel = new GLabel("Click Let's hunt to start game.", getWidth() / 2,
 				(getHeight() / 2));
@@ -102,8 +102,6 @@ public class SnakeAcm extends GraphicsProgram implements ActionListener {
 		
 		
 		
-
-		
 		waitForClick();
 		
 		isPlaying = true;
@@ -116,7 +114,21 @@ public class SnakeAcm extends GraphicsProgram implements ActionListener {
 		remove(line3);
 		remove(line4);
 		add(scoreLabel);
-		add(food);
+		rock.add(new GRect(20,60,60,60));
+		rock.add(new GRect(50,50,500,500));
+		rock.add(new GRect(20,60,60,60));
+		rock.add(new GRect(20,60,60,60));
+		rock.add(new GRect(20,60,60,60));
+		rock.add(new GRect(20,60,60,60));
+		rock.add(new GRect(20,60,60,60));
+		rock.add(new GRect(20,60,60,60));
+		for(int i=0;i<8;i++) {
+			rock.get(i).setFilled(true);
+			rock.get(i).setColor(Color.black);
+			add(rock.get(i));
+		}
+
+		randomFood();
 		
 		timer.start();
 		
@@ -150,6 +162,17 @@ public class SnakeAcm extends GraphicsProgram implements ActionListener {
 		food.setFilled(true);
 		food.setColor(Color.RED);
 		add(food);
+		
+		boolean isFoodInRock = false;
+		for(int i = 0 ;i< rock.size();i++) {
+			if (rock.get(i).getBounds().intersects(food.getBounds())) {
+				isFoodInRock = true;
+			}
+		}
+		if(isFoodInRock) {
+			remove(food);
+			randomFood();
+		}
 		
 		
 	}
@@ -317,13 +340,13 @@ public class SnakeAcm extends GraphicsProgram implements ActionListener {
 			previousScore = score;
 			
 			if (intersectsWithFood()) {
-				score += 10;
+				score += 1;
 				growSnake();
 				remove(food);
 				randomFood();
 			}
 			
-			if (intersectsWithSnake() && score - previousScore == 0) {
+			if ((intersectsWithSnake() && score - previousScore == 0) || intersectsWithRock()) {
 				isGameOver = true;
 			}
 		} else {
@@ -333,8 +356,7 @@ public class SnakeAcm extends GraphicsProgram implements ActionListener {
 			GLabel gameOverLabel = new GLabel("Game Over!", getWidth() / 2, (getHeight() / 2));
 			gameOverLabel.move(-gameOverLabel.getAscent()-240, -gameOverLabel.getAscent()+30);
 			gameOverLabel.setColor(Color.BLACK);
-			gameOverLabel.setFont("Helvetica-100");
-			
+			gameOverLabel.setFont("Helvetica-100");	
 			add(gameOverLabel);
 		}
 	}
@@ -346,6 +368,16 @@ public class SnakeAcm extends GraphicsProgram implements ActionListener {
 		} else {
 			return false;
 		}
+	}
+
+	private boolean intersectsWithRock() {
+		for(int i = 0 ;i< rock.size();i++) {
+			if (rock.get(i).getBounds().intersects(rects[0].getBounds())) {
+				System.out.println(i+" hit.");
+				return true;
+			}
+		}
+		return false;
 	}
 
 	private boolean intersectsWithSnake() {
