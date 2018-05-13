@@ -15,22 +15,20 @@ import acm.program.GraphicsProgram;
 public class SnakeAcm extends GraphicsProgram implements ActionListener {
 
 	public GOval apple;
-
 	public static GRect[] bodyRect;
-
 	private int bodySnakeX, bodySnakeY, bodySnakeWidth, bodySnakeHeight;
-
 	boolean left = false;
 	boolean right = true;
 	boolean up = false;
 	boolean down = false;
-
+	// Speed of snake
 	public Timer timer = new Timer(50, this);
 
 	private boolean openGame, showGameOver;
 	private int score, oldScore;
 	private GLabel textScore;
 
+	// Numbers of rocks
 	ArrayList<GRect> wall = new ArrayList<GRect>();
 
 	public void run() {
@@ -47,7 +45,6 @@ public class SnakeAcm extends GraphicsProgram implements ActionListener {
 		welcomeText.move(-welcomeText.getAscent() - 130, -welcomeText.getHeight());
 		welcomeText.setFont("Comic Sans MS-24");
 		welcomeText.setColor(Color.BLACK);
-
 		add(welcomeText);
 
 		GOval textStart = new GOval((getWidth() / 2) - 30, (getHeight() / 2) + 20, 100, 50);
@@ -126,11 +123,8 @@ public class SnakeAcm extends GraphicsProgram implements ActionListener {
 		}
 
 		randomFood();
-
 		timer.start();
-
 		bodySnakesBlocksRects();
-
 		addKeyListeners();
 
 	}
@@ -149,7 +143,6 @@ public class SnakeAcm extends GraphicsProgram implements ActionListener {
 		int maxX = getWidth() - 15;
 		int maxY = getHeight() - 15;
 		int min = 0;
-
 		int pointX = random.nextInt((maxX - min) + 1) + min;
 		int pointY = random.nextInt((maxY - min) + 1) + min;
 
@@ -211,12 +204,9 @@ public class SnakeAcm extends GraphicsProgram implements ActionListener {
 	public void bodySnakesBlocksRects() {
 
 		bodyRect = new GRect[5];
-
 		bodySnakeY = 0;
-
 		bodySnakeWidth = 15;
 		bodySnakeHeight = 15;
-
 		bodySnakeX = bodyRect.length * bodySnakeWidth;
 
 		for (int i = 0; i < bodyRect.length; i++) {
