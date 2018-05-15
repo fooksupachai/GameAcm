@@ -12,6 +12,7 @@ import acm.graphics.GRect;
 import java.awt.Font;
 import acm.program.GraphicsProgram;
 
+
 public class SnakeAcm extends GraphicsProgram implements ActionListener {
 
 	public GOval apple;
@@ -22,7 +23,7 @@ public class SnakeAcm extends GraphicsProgram implements ActionListener {
 	boolean up = false;
 	boolean down = false;
 	// Speed of snake
-	public Timer timer = new Timer(50, this);
+	public Timer timer = new Timer(500, this);
 
 	private boolean openGame, showGameOver;
 	private int score, oldScore;
