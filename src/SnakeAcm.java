@@ -14,7 +14,7 @@ import acm.program.GraphicsProgram;
 
 
 public class SnakeAcm extends GraphicsProgram implements ActionListener {
-
+//goo
 	public GOval apple;
 	public static GRect[] bodyRect;
 	private int bodySnakeX, bodySnakeY, bodySnakeWidth, bodySnakeHeight;
